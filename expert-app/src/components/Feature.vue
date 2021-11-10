@@ -32,5 +32,8 @@ export default defineComponent({
     text: { type: String, required: true },
     url: { type: String, required: true },
   },
+  data:() => ({
+    msg: "Hola mundo"
+  })
 });
 </script>

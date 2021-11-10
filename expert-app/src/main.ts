@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "@/App.vue";
 import { createApp, h } from "vue-demi";
 
-import "windi.css";
+// import "windi.css";
 import router from "@/router";
 
 import Buefy from "buefy";
