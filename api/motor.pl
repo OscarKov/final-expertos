@@ -32,9 +32,7 @@ createFacts(
         manchasCMOHojas:MCMOH,
         lesionesCMBrotes:LCMB,
         tuberculosAereos:TA,
-        enrollamientoHojas:EH,
-        % tratamiento
-        tipoTratamiento: TT
+        enrollamientoHojas:EH
     }):- (
     ((MBE == 1),assert(mohoBellosoEnves(plantas));
     assert(not(mohoBellosoEnves(plantas)))),
@@ -54,10 +52,6 @@ createFacts(
     ((EH == 1),assert(enrollamientoHojas(plantas));
     assert(not(enrollamientoHojas(plantas))))
     ),
-    ((TT == 1),assert(trataQuimico(tratamiento)),
-    assert(not(trataNatural(tratamiento)));
-    assert(trataNatural(tratamiento));
-    assert(not(trataQuimico(tratamiento)))),
     setGota(plantas),
     setTizonTemprano(plantas),
     setCostraNegra(plantas).
@@ -106,6 +100,26 @@ clearFacts(_, Result) :-
 %process_inputs([H|T]) :-
 %    create_fact(H),
 %    process_inputs(T).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
