@@ -5,6 +5,11 @@ import { createApp, h } from "vue-demi";
 // import "windi.css";
 import router from "@/router";
 
+import axios from "axios";
+import VueAxios from "vue-axios";
+
+Vue.use(VueAxios, axios);
+
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 

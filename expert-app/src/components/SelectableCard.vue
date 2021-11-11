@@ -1,6 +1,7 @@
 <template>
   <div
     class="box selectable"
+    style="height: 100%;"
     v-bind:class="{ 'selected': selected }"
   >
     <b-icon
@@ -9,10 +10,10 @@
       type="is-success"
     ></b-icon>
     <b-image
+      :src="imageUrl"
       alt="Imagen de ejemplo"
-      src="https://picsum.photos/600/400"
     ></b-image>
-    <h4 class="subtitle is-4">{{ title }}</h4>
+    <h4>{{ title }}</h4>
   </div>
 </template>
 
@@ -23,6 +24,7 @@ export default defineComponent({
   name: "SelectableCard",
   props: {
     title: String,
+    imageUrl: String,
     selected: Boolean,
   },
   data: () => ({
