@@ -37,8 +37,7 @@ get_options(ResList) :-
 
 get_solution(Resp) :-
     solution(ResDict),
-    Resp = ResDict
-    ;
+    Resp = ResDict;
     Resp =
     _{
         error: 1,
@@ -46,8 +45,8 @@ get_solution(Resp) :-
     }.
 
 
-perform_clear(_, ResDict) :-
-    clearFacts(_, Result),
+perform_clear(ResDict) :-
+    clearFacts(Result),
     (Result == true),
     ResDict =
     _{
@@ -101,7 +100,7 @@ handle_trait_options(_) :-
 
 % Maneja la peticion GET a "/clear"
 handle_clear(_) :-
-    perform_clear(_, Resp),
+    perform_clear(Resp),
     reply_json_dict(Resp).
 
 

@@ -1,4 +1,4 @@
-:- module(motor, [solution/1, createFacts/1, clearFacts/2]).
+:- module(motor, [solution/1, createFacts/1, clearFacts/1]).
 
 % Reglas dinamicas
 
@@ -21,8 +21,7 @@
 solution(_{enfermedad:E, tratamiento: T}) :-
     (gota(X), E= "Gota", T="tratamiento 1");
     (tizonTemprano(X), E= "Tizon temprano", T="TODO");
-    (costraNegra(X), E= "Costra Negra", T="TODO");
-    E="Ninguna", T="Ninguno".
+    (costraNegra(X), E= "Costra Negra", T="TODO").
 
 
 createFacts(
@@ -80,7 +79,7 @@ setCostraNegra(X) :-
     assert(not(costraNegra(X))).
 
 
-clearFacts(_, Result) :-
+clearFacts(Result) :-
     retractall(mohoBellosoEnves(_)),
     retractall(tallosQuebradizos(_)),
     retractall(manchasCMOHojas(_)),
@@ -92,53 +91,6 @@ clearFacts(_, Result) :-
     retractall(costraNegra(_)),
     Result = true;
     Result = false.
-
-
-% Regla para recorrer las selecciones
-% del usuario y generar los hechos.
-%process_inputs([]).
-%process_inputs([H|T]) :-
-%    create_fact(H),
-%    process_inputs(T).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
