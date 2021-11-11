@@ -13,13 +13,11 @@
     tuberculosAereos/1,
     enrollamientoHojas/1,
 
-    gota/1, tizonTemprano/1, costraNegra/1,
-    %tratamiento
-    trataNatural/1, trataQuimico/1.
+    gota/1, tizonTemprano/1, costraNegra/1.
 
 
 solution(_{enfermedad:E, tratamiento: T}) :-
-    (gota(X), E= "Gota", T="tratamiento 1");
+    (gota(X), E= "Gota", T="TODO");
     (tizonTemprano(X), E= "Tizon temprano", T="TODO");
     (costraNegra(X), E= "Costra Negra", T="TODO");
     E="Ninguna", T="Ninguno".
@@ -32,7 +30,7 @@ createFacts(
         manchasCMOHojas:MCMOH,
         lesionesCMBrotes:LCMB,
         tuberculosAereos:TA,
-        enrollamientoHojas:EH,
+        enrollamientoHojas:EH
     }):- (
     ((MBE == 1),assert(mohoBellosoEnves(plantas));
     assert(not(mohoBellosoEnves(plantas)))),
@@ -55,7 +53,7 @@ createFacts(
     setGota(plantas),
     setTizonTemprano(plantas),
     setCostraNegra(plantas).
-  %    ResBool = true;
+%    ResBool = true;
  %   ResBool = false.
 
 
@@ -80,6 +78,7 @@ setCostraNegra(X) :-
     assert(not(costraNegra(X))).
 
 
+
 clearFacts(_, Result) :-
     retractall(mohoBellosoEnves(_)),
     retractall(tallosQuebradizos(_)),
@@ -87,9 +86,9 @@ clearFacts(_, Result) :-
     retractall(lesionesCMBrotes(_)),
     retractall(tuberculosAereos(_)),
     retractall(enrollamientoHojas(_)),
-    retractall(gota(_)),
-    retractall(tizonTemprano(_)),
-    retractall(costraNegra(_)),
+    retractall(setGota(_)),
+    retractall(setTizonTemprano(_)),
+    retractall(setCostraNegra(_)),
     Result = true;
     Result = false.
 
@@ -100,26 +99,6 @@ clearFacts(_, Result) :-
 %process_inputs([H|T]) :-
 %    create_fact(H),
 %    process_inputs(T).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
