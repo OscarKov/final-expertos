@@ -4,6 +4,7 @@
 :- use_module(library(http/http_cors)).
 
 :- use_module(motor).
+:- use_module(options).
 
 :- encoding(utf8).
 :- set_setting(http:cors, [*]).
@@ -19,26 +20,11 @@
 
 :- http_handler('/trait-options', handle_trait_options, []).
 
-get_options(ResList) :-
-    ResList = [
-        _{
-            key: "prueba",
-            name: "prueba",
-            imgUrl: "http",
-            value: 0
-        },
-        _{
-            key: "prueba",
-            name: "prueba",
-            imgUrl: "http",
-            value: 0
-        }
-    ].
+
 
 get_solution(Resp) :-
     solution(ResDict),
-    Resp = ResDict
-    ;
+    Resp = ResDict;
     Resp =
     _{
         error: 1,
@@ -46,8 +32,8 @@ get_solution(Resp) :-
     }.
 
 
-perform_clear(_, ResDict) :-
-    clearFacts(_, Result),
+perform_clear(ResDict) :-
+    clearFacts(Result),
     (Result == true),
     ResDict =
     _{
@@ -101,7 +87,7 @@ handle_trait_options(_) :-
 
 % Maneja la peticion GET a "/clear"
 handle_clear(_) :-
-    perform_clear(_, Resp),
+    perform_clear(Resp),
     reply_json_dict(Resp).
 
 
@@ -110,23 +96,3 @@ server(Port) :-
 
 :- initialization(server(8081)).
 % Fin Servidor
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

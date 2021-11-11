@@ -1,4 +1,4 @@
-:- module(motor, [solution/1, createFacts/1, clearFacts/2]).
+:- module(motor, [solution/1, createFacts/1, clearFacts/1]).
 
 % Reglas dinamicas
 
@@ -37,8 +37,8 @@
 solution(_{enfermedad:E, tratamiento: T}) :-
     (gota(X), E= "Gota", T="TODO");
     (tizonTemprano(X), E= "Tizon temprano", T="TODO");
-    (costraNegra(X), E= "Costra Negra", T="TODO");
-    E="Ninguna", T="Ninguno".
+    (tizonTardio(X), E= "Tizon tardio ", T="TODO");
+    (costraNegra(X), E= "Costra Negra", T="TODO").
 
 
 createFacts(
@@ -269,34 +269,125 @@ setTorbo(X) :-
 
 setPataNegra(X) :-
     (
-        
+        colaracionNegraTallos(X),
+        olorFuerteRaiz(X),
+        decolaracionTuberculos(X),
+        assert(pataNegra(X))
     );
-    setCostraNegra(plantas),
-    setMarchitezBacteriana(plantas),
-    setPolilla(plantas),
-    setPolillaGuatemalteca(plantas),
-    setCarbon(plantas),
-    setRoya(plantas).
-
+    assert(not(pataNegra(X))).
+    
 setCostraNegra(X) :-
-    escasaBrotacionTallos(X),
-    tuberculosAereos(X),
-    enrollamientoHojas(X),
-    assert(costraNegra(X));
+    (
+        tuberculosAereos(X),
+        escasaBrotacionTallos(X),
+        debilidadTallos(X),
+        enrollamientoHojas(X),
+        assert(costraNegra(X))
+    );
     assert(not(costraNegra(X))).
 
+setMarchitezBacteriana(X) :-
+    (
+        sustaciaSuelo(X),
+        blanqueamientoTuberculos(X),
+        assert(marchitezBacteriana(X))
+    );
+    assert(not(marchitezBacteriana(X))).
+
+setPolilla(X) :-
+    (
+        ampollasTransparentes(X),
+        tunelesTuberculos(X),
+        orificiosTuberculos(X),
+        assert(polilla(X))
+    );
+    assert(not(polilla(X))).
+
+setPolillaGuatemalteca(X) :-
+    (
+        tuberculoPodrido(X),
+        assert(polillaGualtemalteca(X))
+    );
+    assert(not(polillaGualtemalteca(X))).
+
+setCarbon(X) :-
+    (
+        tumoresTallo(X),
+        tumoresTuberculos(X),
+        assert(carbon(X))
+    );
+    assert(not(carbon(X))).
+
+setRoya(X) :-
+    (
+        alturaTerreno(X),
+        puntosRojizosHojas(X),
+        assert(roya(X))
+    );
+    assert(not(roya(X))).
 
 
-clearFacts(_, Result) :-
+clearFacts(Result) :-
     retractall(mohoBellosoEnves(_)),
     retractall(manchasOsHojas(_)),
+    retractall(manchasOsTallo(_)),
+    retractall(manchasTuberculo(_)),
+
     retractall(manchasAnilloHojas(_)),
-    retractall(escasaBrotacionTallos(_)),
+    retractall(caidaHojas(_)),
+    retractall(follajeAmarillo(_)),
+    retractall(tuberculosSecos(_)),
+
+    retractall(lesionesCastanoFollaje(_)),
+    retractall(manchasBordesHojas(_)),
+    retractall(heridadTuberculos(_)),
+
+    retractall(lesionesCircular(_)),
+    retractall(tuberculosLesionesHundidas(_)),
+    retractall(tuberculosCorchoso(_)),
+    retractall(lesionesNecroticas(_)),
+    retractall(cavidadesTuberculos(_)),
+
+    retractall(marchitacionFollaje(_)),
+    retractall(marchitacionRaiz(_)),
+    retractall(tuberculosMoho(_)),
+
+    retractall(colaracionNegraTallos(_)),
+    retractall(olorFuerteRaiz(_)),
+    retractall(decolaracionTuberculos(_)),
+
     retractall(tuberculosAereos(_)),
+    retractall(escasaBrotacionTallos(_)),
+    retractall(debilidadTallos(_)),
     retractall(enrollamientoHojas(_)),
+
+    retractall(sustaciaSuelo(_)),
+    retractall(blanqueamientoTuberculos(_)),
+
+    retractall(ampollasTransparentes(_)),
+    retractall(tunelesTuberculos(_)),
+    retractall(orificiosTuberculos(_)),
+
+    retractall(tuberculoPodrido(_)),
+
+    retractall(tumoresTallo(_)),
+    retractall(tumoresTuberculos(_)),
+
+    retractall(alturaTerreno(_)),
+    retractall(puntosRojizosHojas(_)),
+
     retractall(gota(_)),
     retractall(tizonTemprano(_)),
+    retractall(tizonTardio(_)),
+    retractall(ronaPolvorosa(_)),
+    retractall(torbo(_)),
+    retractall(pataNegra(_)),
     retractall(costraNegra(_)),
+    retractall(marchitezBacteriana(_)),
+    retractall(polilla(_)),
+    retractall(polillaGualtemalteca(_)),
+    retractall(carbon(_)),
+    retractall(roya(_)),
     Result = true;
     Result = false.
 
