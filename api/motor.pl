@@ -37,8 +37,16 @@
 solution(_{enfermedad:E, tratamiento: T}) :-
     (gota(X), E= "Gota", T="TODO");
     (tizonTemprano(X), E= "Tizon temprano", T="TODO");
-    (tizonTardio(X), E= "Tizon tardio ", T="TODO");
-    (costraNegra(X), E= "Costra Negra", T="TODO").
+    (tizonTardio(X), E= "Tizon tardio", T="TODO");
+    (ronaPolvorosa(X), E= "Rona Polvoroza", T="TODO");
+    (torbo(X), E= "Torbo", T="TODO");
+    (pataNegra(X), E= "Pata Negra", T="TODO");
+    (costraNegra(X), E= "Costra Negra", T="TODO");
+    (marchitezBacteriana(X), E= "Marchitez Bacteriana", T="TODO");
+    (polilla(X), E= "Polilla", T="TODO");
+    (polillaGualtemalteca(X), E= "Polilla Gualtemalteca", T="TODO");
+    (carbon(X), E= "Carbon", T="TODO");
+    (roya(X), E= "Roya", T="TODO").
 
 
 createFacts(
@@ -390,38 +398,3 @@ clearFacts(Result) :-
     retractall(roya(_)),
     Result = true;
     Result = false.
-
-
-% Regla para recorrer las selecciones
-% del usuario y generar los hechos.
-%process_inputs([]).
-%process_inputs([H|T]) :-
-%    create_fact(H),
-%    process_inputs(T).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
