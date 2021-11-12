@@ -10,8 +10,8 @@
       type="is-success"
     ></b-icon>
     <b-image
+      :alt="'Imagen ' + title"
       :src="imageUrl"
-      alt="Imagen de ejemplo"
     ></b-image>
     <h4>{{ title }}</h4>
   </div>
