@@ -4,6 +4,7 @@
 :- use_module(library(http/http_cors)).
 
 :- use_module(motor).
+:- use_module(options).
 
 :- encoding(utf8).
 :- set_setting(http:cors, [*]).
@@ -19,31 +20,12 @@
 
 :- http_handler('/trait-options', handle_trait_options, []).
 
-get_options(ResList) :-
-    ResList = [
-        _{
-            key: "prueba",
-            name: "prueba",
-            imgUrl: "http",
-            value: 0
-        },
-        _{
-            key: "prueba",
-            name: "prueba",
-            imgUrl: "http",
-            value: 0
-        }
-    ].
+
 
 get_solution(Resp) :-
     solution(ResDict),
-    Resp = ResDict;
-    Resp =
-    _{
-        error: 1,
-        msg: "No se puede obtener solucion."
-    }.
-
+    Resp = ResDict,
+    clearFacts(_).
 
 perform_clear(ResDict) :-
     clearFacts(Result),
@@ -73,6 +55,7 @@ handle_home(_) :-
 
 % Maneja la peticion GET a "/solution".
 handle_solution(_) :-
+    cors_enable,
     get_solution(Result),
     reply_json_dict(Result).
 
@@ -95,6 +78,7 @@ handle_post(Request) :-
 
 % Retorna las opciones de caracteristicas.
 handle_trait_options(_) :-
+   cors_enable,
    get_options(ResList),
    reply_json(ResList).
 
@@ -109,8 +93,6 @@ server(Port) :-
 
 :- initialization(server(8081)).
 % Fin Servidor
-
-
 
 
 
