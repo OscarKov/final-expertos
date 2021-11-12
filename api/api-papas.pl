@@ -24,7 +24,8 @@
 
 get_solution(Resp) :-
     solution(ResDict),
-    Resp = ResDict;
+    Resp = ResDict,
+    clearFacts(_);
     Resp =
     _{
         error: 1,
