@@ -1,5 +1,7 @@
 :- module(motor, [solution/1, createFacts/1, clearFacts/1]).
 
+:- encoding(utf8).
+
 % Reglas dinamicas
 
 :- dynamic
@@ -29,25 +31,40 @@
     % roya
     alturaTerreno/1,puntosRojizosHojas/1,
 
+    %tipo de tratamiento natural o quimica
+    tratamientoNatural/1, tratamientoQuimico/1,
     % PLAGAS Y ENFERMEDADES DEL CULTIVO DE LA PAPA
-    gota/1, tizonTemprano/1, tizonTardio/1, ronaPolvorosa/1, torbo/1, pataNegra/1, 
-    costraNegra/1, marchitezBacteriana/1, polilla/1, polillaGualtemalteca/1, carbon/1, roya/1.
+    gotaN/1,gotaQ/1, tizonTempranoN/1,tizonTempranoQ/1, tizonTardioN/1,tizonTardioQ/1, 
+    ronaPolvorosaN/1,ronaPolvorosaQ/1, torboN/1,torboQ/1, pataNegraN/1,pataNegraQ/1, 
+    costraNegraN/1,costraNegraQ/1, marchitezBacterianaN/1,marchitezBacterianaQ/1, polillaN/1,polillaQ/1, 
+    polillaGualtemaltecaN/1,polillaGualtemaltecaQ/1, carbonN/1,carbonQ/1, royaN/1,royaQ/1.
 
 
 solution(_{enfermedad:E, tratamiento: T}) :-
-    (gota(X), E= "Gota", T="TODO");
-    (tizonTemprano(X), E= "Tizon temprano", T="TODO");
-    (tizonTardio(X), E= "Tizon tardio", T="TODO");
-    (ronaPolvorosa(X), E= "Rona Polvoroza", T="TODO");
-    (torbo(X), E= "Torbo", T="TODO");
-    (pataNegra(X), E= "Pata Negra", T="TODO");
-    (costraNegra(X), E= "Costra Negra", T="TODO");
-    (marchitezBacteriana(X), E= "Marchitez Bacteriana", T="TODO");
-    (polilla(X), E= "Polilla", T="TODO");
-    (polillaGualtemalteca(X), E= "Polilla Gualtemalteca", T="TODO");
-    (carbon(X), E= "Carbon", T="TODO");
-    (roya(X), E= "Roya", T="TODO").
-
+        (gotaN(X), E= "Gota", T="tratamiento natural");
+        (gotaQ(X), E= "Gota", T="tratamiento quimico");
+        (tizonTempranoN(X), E= "Tizon temprano", T="tratamiento natural");
+        (tizonTempranoQ(X), E= "Tizon temprano", T="tratamiento quimico");
+        (tizonTardioN(X), E= "Tizon tardio", T="tratamiento natural");
+        (tizonTardioQ(X), E= "Tizon tardio", T="tratamiento quimico");
+        (ronaPolvorosaN(X), E= "Rona polvorosa", T="tratamiento natural");
+        (ronaPolvorosaQ(X), E= "Rona polvorosa", T="tratamiento quimico");
+        (torboN(X), E= "Torbó", T="tratamiento natural");
+        (torboQ(X), E= "Torbó", T="tratamiento quimico");
+        (pataNegraN(X), E= "Pata negra", T="tratamiento natural");
+        (pataNegraQ(X), E= "Pata negra", T="tratamiento quimico");
+        (costraNegraN(X), E= "Costra negra", T="tratamiento natural");
+        (costraNegraQ(X), E= "Costra negra", T="tratamiento quimico");
+        (marchitezBacterianaN(X), E= "Marchitez bacteriana", T="tratamiento natural");
+        (marchitezBacterianaQ(X), E= "Marchitez bacteriana", T="tratamiento quimico");
+        (polillaN(X), E= "Polilla", T="tratamiento natural");
+        (polillaQ(X), E= "Polilla", T="tratamiento quimico");
+        (polillaGualtemaltecaN(X), E= "Polilla gualtemalteca", T="tratamiento natural");
+        (polillaGualtemaltecaQ(X), E= "Polilla gualtemalteca", T="tratamiento quimico");
+        (carbonN(X), E= "Carbon", T="tratamiento natural");
+        (carbonQ(X), E= "Carbon", T="tratamiento quimico");
+        (royaN(X), E= "Roya", T="tratamiento natural");
+        (royaQ(X), E= "Roya", T="tratamiento quimico").
 
 createFacts(
     _{
@@ -97,7 +114,10 @@ createFacts(
         tumoresTuberculos:TUTU,
 
         alturaTerreno:ALT,
-        puntosRojizosHojas:PRH
+        puntosRojizosHojas:PRH,
+
+        tratamientoNatural:TNA,
+        tratamientoQuimico:TQU
 
     }):- (
     %----------------------gota -------------------
@@ -207,133 +227,294 @@ createFacts(
     assert(not(alturaTerreno(plantas)))),
 
     ((PRH == 1),assert(puntosRojizosHojas(plantas));
-    assert(not(puntosRojizosHojas(plantas))))
+    assert(not(puntosRojizosHojas(plantas)))),
+    %-------------------tratamientos-----------------
+    ((TNA == 1),assert(tratamientoNatural(plantas));
+    assert(not(tratamientoNatural(plantas)))),
+
+    ((TQU == 1),assert(tratamientoQuimico(plantas));
+    assert(not(tratamientoQuimico(plantas))))
 
     ),
-    setGota(plantas),
-    setTizonTemprano(plantas),
-    setTizonTardio(plantas),
-    setRonaPolvorosa(plantas),
-    setTorbo(plantas),
-    setPataNegra(plantas),
-    setCostraNegra(plantas),
-    setMarchitezBacteriana(plantas),
-    setPolilla(plantas),
-    setPolillaGuatemalteca(plantas),
-    setCarbon(plantas),
-    setRoya(plantas).
+%    setGota(plantas),
+    setTratamientoNaturalGota(plantas),
+    setTratamientoQuimicoGota(plantas),
+    setTratamientoNaturalTizonTemprano(plantas),
+    setTratamientoQuimicoTizonTemprano(plantas),
+    setTratamientoNaturalTizonTardio(plantas),
+    setTratamientoQuimicoTizonTardio(plantas),
+    setTratamientoNaturalRonaPolvoroza(plantas),
+    setTratamientoQuimicoRonaPolvoroza(plantas),
+    setTratamientoNaturalTorbo(plantas),
+    setTratamientoQuimicoTorbo(plantas),
+    setTratamientoNaturalPataNegra(plantas),
+    setTratamientoQuimicoPataNegra(plantas),
+    setTratamientoNaturalCostraNegra(plantas),
+    setTratamientoQuimicoCostraNegra(plantas),
+    setTratamientoNaturalMarchitezBacteriana(plantas),
+    setTratamientoQuimicoMarchitezBacteriana(plantas),
+    setTratamientoNaturalPolilla(plantas),
+    setTratamientoQuimicoPolilla(plantas),
+    setTratamientoNaturalPolillaGualtemalteca(plantas),
+    setTratamientoQuimicoPolillaGualtemalteca(plantas),
+    setTratamientoNaturalCarbon(plantas),
+    setTratamientoQuimicoCarbon(plantas),
+    setTratamientoNaturalRoya(plantas),
+    setTratamientoQuimicoRoya(plantas).
 %    ResBool = true;
 %    ResBool = false.
 
-
 setGota(X) :-
-    (
-        mohoBellosoEnves(X),
-        manchasOsHojas(X),
-        manchasOsTallo(X),
-        manchasTuberculo(X),
-        assert(gota(X))
-    );
-    assert(not(gota(X))).
+    mohoBellosoEnves(X),
+    manchasOsHojas(X),
+    manchasOsTallo(X),
+    manchasTuberculo(X).
 
 setTizonTemprano(X) :-
-    (
-        manchasAnilloHojas(X),
-        caidaHojas(X),
-        follajeAmarillo(X),
-        tuberculosSecos(X),
-        assert(tizonTemprano(X))
-    );
-    assert(not(tizonTemprano(X))).
+    manchasAnilloHojas(X),
+    caidaHojas(X),
+    follajeAmarillo(X),
+    tuberculosSecos(X).
 
 setTizonTardio(X) :-
-    (
-        lesionesCastanoFollaje(X),
-        manchasBordesHojas(X),
-        heridadTuberculos(X),
-        assert(tizonTardio(X))
-    );
-    assert(not(tizonTemprano(X))).
+    lesionesCastanoFollaje(X),
+    manchasBordesHojas(X),
+    heridadTuberculos(X).
 
 setRonaPolvorosa(X) :-
-    (
-        lesionesCircular(X),
-        tuberculosLesionesHundidas(X),
-        tuberculosCorchoso(X),
-        lesionesNecroticas(X),
-        cavidadesTuberculos(X),
-        assert(ronaPolvorosa(X))
-    );
-    assert(not(ronaPolvorosa(X))).
+    lesionesCircular(X),
+    tuberculosLesionesHundidas(X),
+    tuberculosCorchoso(X),
+    lesionesNecroticas(X),
+    cavidadesTuberculos(X).
 
 setTorbo(X) :-
-    (
-        marchitacionFollaje(X),
-        marchitacionRaiz(X),
-        tuberculosMoho(X),
-        assert(torbo(X))
-    );
-    assert(not(torbo(X))).
+    marchitacionFollaje(X),
+    marchitacionRaiz(X),
+    tuberculosMoho(X).
 
 setPataNegra(X) :-
-    (
-        colaracionNegraTallos(X),
-        olorFuerteRaiz(X),
-        decolaracionTuberculos(X),
-        assert(pataNegra(X))
-    );
-    assert(not(pataNegra(X))).
-    
+    colaracionNegraTallos(X),
+    olorFuerteRaiz(X),
+    decolaracionTuberculos(X).
+
 setCostraNegra(X) :-
-    (
-        tuberculosAereos(X),
-        escasaBrotacionTallos(X),
-        debilidadTallos(X),
-        enrollamientoHojas(X),
-        assert(costraNegra(X))
-    );
-    assert(not(costraNegra(X))).
+    tuberculosAereos(X),
+    escasaBrotacionTallos(X),
+    debilidadTallos(X),
+    enrollamientoHojas(X).
 
 setMarchitezBacteriana(X) :-
-    (
-        sustaciaSuelo(X),
-        blanqueamientoTuberculos(X),
-        assert(marchitezBacteriana(X))
-    );
-    assert(not(marchitezBacteriana(X))).
+    sustaciaSuelo(X),
+    blanqueamientoTuberculos(X).
 
 setPolilla(X) :-
-    (
-        ampollasTransparentes(X),
-        tunelesTuberculos(X),
-        orificiosTuberculos(X),
-        assert(polilla(X))
-    );
-    assert(not(polilla(X))).
+    ampollasTransparentes(X),
+    tunelesTuberculos(X),
+    orificiosTuberculos(X).
 
 setPolillaGuatemalteca(X) :-
-    (
-        tuberculoPodrido(X),
-        assert(polillaGualtemalteca(X))
-    );
-    assert(not(polillaGualtemalteca(X))).
+    tuberculoPodrido(X).
 
 setCarbon(X) :-
-    (
-        tumoresTallo(X),
-        tumoresTuberculos(X),
-        assert(carbon(X))
-    );
-    assert(not(carbon(X))).
+    tumoresTallo(X),
+    tumoresTuberculos(X).
 
 setRoya(X) :-
-    (
-        alturaTerreno(X),
-        puntosRojizosHojas(X),
-        assert(roya(X))
-    );
-    assert(not(roya(X))).
+    alturaTerreno(X),
+    puntosRojizosHojas(X).
 
+setTratamientoNaturalGota(X) :-
+    (
+        setGota(X),
+        tratamientoNatural(X),
+        assert(gotaN(X))
+    );
+    assert(not(gotaN(X))).
+
+setTratamientoQuimicoGota(X) :-
+    (
+        setGota(X),
+        tratamientoQuimico(X),
+        assert(gotaQ(X))
+    );
+    assert(not(gotaQ(X))).
+
+setTratamientoNaturalTizonTemprano(X) :-
+    (
+        setTizonTemprano(X),
+        tratamientoNatural(X),
+        assert(tizonTempranoN(X))
+    );
+    assert(not(tizonTempranoN(X))).
+
+setTratamientoQuimicoTizonTemprano(X) :-
+    (
+        setTizonTemprano(X),
+        tratamientoQuimico(X),
+        assert(tizonTempranoQ(X))
+    );
+    assert(not(tizonTempranoQ(X))).
+
+setTratamientoNaturalTizonTardio(X) :-
+    (
+        setTizonTardio(X),
+        tratamientoNatural(X),
+        assert(tizonTardioN(X))
+    );
+    assert(not(tizonTardioN(X))).
+
+setTratamientoQuimicoTizonTardio(X) :-
+    (
+        setTizonTardio(X),
+        tratamientoQuimico(X),
+        assert(tizonTardioQ(X))
+    );
+    assert(not(tizonTardioQ(X))).
+
+setTratamientoNaturalRonaPolvoroza(X) :-
+    (
+        setRonaPolvorosa(X),
+        tratamientoNatural(X),
+        assert(ronaPolvorosaN(X))
+    );
+    assert(not(ronaPolvorosaN(X))).
+
+setTratamientoQuimicoRonaPolvoroza(X) :-
+    (
+        setRonaPolvorosa(X),
+        tratamientoQuimico(X),
+        assert(ronaPolvorosaQ(X))
+    );
+    assert(not(ronaPolvorosaQ(X))).
+
+setTratamientoNaturalTorbo(X) :-
+    (
+        setTorbo(X),
+        tratamientoNatural(X),
+        assert(torboN(X))
+    );
+    assert(not(torboN(X))).
+
+setTratamientoQuimicoTorbo(X) :-
+    (
+        setTorbo(X),
+        tratamientoQuimico(X),
+        assert(torboQ(X))
+    );
+    assert(not(torboQ(X))).
+
+setTratamientoNaturalPataNegra(X) :-
+    (
+        setPataNegra(X),
+        tratamientoNatural(X),
+        assert(pataNegraN(X))
+    );
+    assert(not(pataNegraN(X))).
+
+setTratamientoQuimicoPataNegra(X) :-
+    (
+        setPataNegra(X),
+        tratamientoQuimico(X),
+        assert(pataNegraQ(X))
+    );
+    assert(not(pataNegraQ(X))).
+
+setTratamientoNaturalCostraNegra(X) :-
+    (
+        setCostraNegra(X),
+        tratamientoNatural(X),
+        assert(costraNegraN(X))
+    );
+    assert(not(costraNegraN(X))).
+
+setTratamientoQuimicoCostraNegra(X) :-
+    (
+        setCostraNegra(X),
+        tratamientoQuimico(X),
+        assert(costraNegraQ(X))
+    );
+    assert(not(costraNegraQ(X))).
+
+setTratamientoNaturalMarchitezBacteriana(X) :-
+    (
+        setMarchitezBacteriana(X),
+        tratamientoNatural(X),
+        assert(marchitezBacterianaN(X))
+    );
+    assert(not(marchitezBacterianaN(X))).
+
+setTratamientoQuimicoMarchitezBacteriana(X) :-
+    (
+        setMarchitezBacteriana(X),
+        tratamientoQuimico(X),
+        assert(marchitezBacterianaQ(X))
+    );
+    assert(not(marchitezBacterianaQ(X))).
+
+setTratamientoNaturalPolilla(X) :-
+    (
+        setPolilla(X),
+        tratamientoNatural(X),
+        assert(polillaN(X))
+    );
+    assert(not(polillaN(X))).
+
+setTratamientoQuimicoPolilla(X) :-
+    (
+        setPolilla(X),
+        tratamientoQuimico(X),
+        assert(polillaQ(X))
+    );
+    assert(not(polillaQ(X))).
+
+setTratamientoNaturalPolillaGualtemalteca(X) :-
+    (
+        setPolillaGuatemalteca(X),
+        tratamientoNatural(X),
+        assert(polillaGualtemaltecaN(X))
+    );
+    assert(not(polillaGualtemaltecaN(X))).
+
+setTratamientoQuimicoPolillaGualtemalteca(X) :-
+    (
+        setPolillaGuatemalteca(X),
+        tratamientoQuimico(X),
+        assert(polillaGualtemaltecaQ(X))
+    );
+    assert(not(polillaGualtemaltecaQ(X))).
+
+setTratamientoNaturalCarbon(X) :-
+    (
+        setCarbon(X),
+        tratamientoNatural(X),
+        assert(carbonN(X))
+    );
+    assert(not(carbonN(X))).
+
+setTratamientoQuimicoCarbon(X) :-
+    (
+        setCarbon(X),
+        tratamientoQuimico(X),
+        assert(carbonQ(X))
+    );
+    assert(not(carbonQ(X))).
+
+setTratamientoNaturalRoya(X) :-
+    (
+        setRoya(X),
+        tratamientoNatural(X),
+        assert(royaN(X))
+    );
+    assert(not(royaN(X))).
+
+setTratamientoQuimicoRoya(X) :-
+    (
+        setRoya(X),
+        tratamientoQuimico(X),
+        assert(royaQ(X))
+    );
+    assert(not(royaQ(X))).
 
 clearFacts(Result) :-
     retractall(mohoBellosoEnves(_)),
@@ -384,17 +565,33 @@ clearFacts(Result) :-
     retractall(alturaTerreno(_)),
     retractall(puntosRojizosHojas(_)),
 
-    retractall(gota(_)),
-    retractall(tizonTemprano(_)),
-    retractall(tizonTardio(_)),
-    retractall(ronaPolvorosa(_)),
-    retractall(torbo(_)),
-    retractall(pataNegra(_)),
-    retractall(costraNegra(_)),
-    retractall(marchitezBacteriana(_)),
-    retractall(polilla(_)),
-    retractall(polillaGualtemalteca(_)),
-    retractall(carbon(_)),
-    retractall(roya(_)),
+    retractall(gotaN(_)),
+    retractall(gotaQ(_)),
+    retractall(tizonTempranoN(_)),
+    retractall(tizonTempranoQ(_)),
+    retractall(tizonTardioN(_)),
+    retractall(tizonTardioQ(_)),
+    retractall(ronaPolvorosaN(_)),
+    retractall(ronaPolvorosaQ(_)),
+    retractall(torboN(_)),
+    retractall(torboQ(_)),
+    retractall(pataNegraN(_)),
+    retractall(pataNegraQ(_)),
+    retractall(costraNegraN(_)),
+    retractall(costraNegraQ(_)),
+    retractall(marchitezBacterianaN(_)),
+    retractall(marchitezBacterianaQ(_)),
+    retractall(polillaN(_)),
+    retractall(polillaQ(_)),
+    retractall(polillaGualtemaltecaN(_)),
+    retractall(polillaGualtemaltecaQ(_)),
+    retractall(carbonN(_)),
+    retractall(carbonQ(_)),
+    retractall(royaN(_)),
+    retractall(royaQ(_)),
+
+    retractall(tratamientoNatural(_)),
+    retractall(tratamientoQuimico(_)),
+
     Result = true;
     Result = false.
