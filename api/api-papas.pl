@@ -25,7 +25,8 @@
 get_solution(Resp) :-
     solution(ResDict),
     Resp = ResDict,
-    clearFacts(_).
+    clearFacts(_);
+    Resp = _{error: 1, msg: "Con los parametros ingresados, no es posible obtener un resultado."}.
 
 perform_clear(ResDict) :-
     clearFacts(Result),

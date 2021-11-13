@@ -44,6 +44,28 @@
           />
         </div>
       </div>
+      <div class="columns mt-5">
+        <div class="column is-6">
+          <b-radio-button
+            native-value="true"
+            type="is-success is-light is-outlined"
+            v-model="isNaturalMedication"
+          >
+            <b-icon icon="sprout-outline"></b-icon>
+            <span>Usar un tratamiento Natural</span>
+          </b-radio-button>
+        </div>
+        <div class="column is-6">
+          <b-radio-button
+            native-value="false"
+            type="is-success is-light is-outlined"
+            v-model="isNaturalMedication"
+          >
+            <b-icon icon="bottle-tonic-plus-outline"></b-icon>
+            <span>Usar un tratamiento Quimico</span>
+          </b-radio-button>
+        </div>
+      </div>
       <b-button
         @click="resolve"
         class="is-info is-light"
@@ -102,6 +124,7 @@ export default defineComponent({
     minimumSelections: 1,
     traitOptions: [] as TraitOption[],
     solution: {} as Solution,
+    isNaturalMedication: "true",
   }),
   methods: {
     toggleSelection(option: TraitOption) {
@@ -118,9 +141,19 @@ export default defineComponent({
     },
     async parseData() {
       let parsed: any = {};
+      let medicationOptions = {
+        tratamientoNatural: 1,
+        tratamientoQuimico: 0,
+      };
       await this.traitOptions.forEach((option) => {
         parsed[`${option.key}`] = option.value;
       });
+      if (this.isNaturalMedication !== "true") {
+        medicationOptions.tratamientoNatural = 0;
+        medicationOptions.tratamientoQuimico = 1;
+      }
+      parsed = { ...parsed, ...medicationOptions };
+      console.log(parsed);
       return parsed;
     },
     verifySelections() {
@@ -157,7 +190,7 @@ export default defineComponent({
     },
     async sendData() {
       const base = import.meta.env.VITE_APP_API_URL;
-      const parsedData = await this.parseData();
+      let parsedData = await this.parseData();
       const { data } = await this.axios.post(base + "/send", parsedData);
       if (data.error != 0) {
         this.showNotification(data.msg, "is-danger");
