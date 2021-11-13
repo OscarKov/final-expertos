@@ -41,30 +41,30 @@
 
 
 solution(_{enfermedad:E, tratamiento: T}) :-
-        (gotaN(X), E= "Gota", T="tratamiento natural");
-        (gotaQ(X), E= "Gota", T="tratamiento quimico");
-        (tizonTempranoN(X), E= "Tizon temprano", T="tratamiento natural");
-        (tizonTempranoQ(X), E= "Tizon temprano", T="tratamiento quimico");
-        (tizonTardioN(X), E= "Tizon tardio", T="tratamiento natural");
-        (tizonTardioQ(X), E= "Tizon tardio", T="tratamiento quimico");
-        (ronaPolvorosaN(X), E= "Rona polvorosa", T="tratamiento natural");
-        (ronaPolvorosaQ(X), E= "Rona polvorosa", T="tratamiento quimico");
-        (torboN(X), E= "Torbó", T="tratamiento natural");
-        (torboQ(X), E= "Torbó", T="tratamiento quimico");
-        (pataNegraN(X), E= "Pata negra", T="tratamiento natural");
-        (pataNegraQ(X), E= "Pata negra", T="tratamiento quimico");
-        (costraNegraN(X), E= "Costra negra", T="tratamiento natural");
-        (costraNegraQ(X), E= "Costra negra", T="tratamiento quimico");
-        (marchitezBacterianaN(X), E= "Marchitez bacteriana", T="tratamiento natural");
-        (marchitezBacterianaQ(X), E= "Marchitez bacteriana", T="tratamiento quimico");
-        (polillaN(X), E= "Polilla", T="tratamiento natural");
-        (polillaQ(X), E= "Polilla", T="tratamiento quimico");
-        (polillaGualtemaltecaN(X), E= "Polilla gualtemalteca", T="tratamiento natural");
-        (polillaGualtemaltecaQ(X), E= "Polilla gualtemalteca", T="tratamiento quimico");
-        (carbonN(X), E= "Carbon", T="tratamiento natural");
-        (carbonQ(X), E= "Carbon", T="tratamiento quimico");
-        (royaN(X), E= "Roya", T="tratamiento natural");
-        (royaQ(X), E= "Roya", T="tratamiento quimico").
+        (gotaN(X), E= "Gota", T="Sembrar oportunamente: esto quiere decir, antes de los períodos de mayor concentración de lluvia y antes de la mayoría de cultivos de la zona, para evitar la presión de inóculo de otros cultivos; Manejos agronómico: utilizar distancias de siembra adecuadas para disminuir la humedad dentro del cultivo, construcción de drenajes, aporques altos, sembrar variedades tolerantes a la enfermedad.");
+        (gotaQ(X), E= "Gota", T="AVIO 50% WG (Granulado Dispersable), presenta acción preventiva, curativa y antiesporulante, muy específica sobre Omycetes (grupo al que pertenece la gota de la papa). Inhibe la germinación de las esporas y disminuye el potencial de re-infección de la enfermedad");
+        (tizonTempranoN(X), E= "Tizon temprano", T="Utilizar para nuevas siembra semilla sana (procedentes de plantas libres de enfermedades), tratar de no herir las plantas cuando se realicen labores de limpieza. Es necesario mantener un drenaje adecuado.");
+        (tizonTempranoQ(X), E= "Tizon temprano", T="Sulfato de cobre 24 SC (Suspensión Concentrada), en dosis de 8 – 24 cc / bomba de 4 galones. 1 día, período de espera entre la última aplicación y la cosecha.");
+        (tizonTardioN(X), E= "Tizon tardio", T="Eliminar las plantas enfermas, arrancarlas y colocarlas dentro de una bolsa plástica inmediatamente para no contaminar a las demás, ya que el patógeno puede dañar el cultivo en pocos días, Realizar una fertilización adecuada, antes se debe de efectuar un análisis de suelo.");
+        (tizonTardioQ(X), E= "Tizon tardio", T="Azoxystrobin 50 WG (Granulado Dispersable), en dosis de 8 g / bomba de 4 galones. 1 día, período de espera entre la última aplicación y la cosecha.");
+        (ronaPolvorosaN(X), E= "Roña polvorosa", T="Eliminar plantas enfermas. Manejo de camellones a una altura de 0.4 a 0.5 m. Realizar siembras en surcos con curvas a nivel.  Mantener un programa de fertilización de acuerdo a las necesidades del cultivo. (realizar análisis de suelo), Bajar la acidez del suelo aplicando cal o ceniza, esto dependerá del análisis de suelo.");
+        (ronaPolvorosaQ(X), E= "Roña polvorosa", T="Sulfato de cobre 24 SC (Suspensión Concentrada) en dosis de 20 - 30 cc / bomba de 4 galones. 1 día de período de espera entre la última aplicación y la cosecha.");
+        (torboN(X), E= "Torbó", T="Evitar encharcamiento en el cultivo ya que el agua es un mecanismo de las enfermedades, Impedir que el agua se acumule en el tronco de la planta. Realizar una buena fertilización, efectuando un análisis de suelo. Evitar aplicaciones excesivas de nitrógeno. Eliminar malezas (arvenses) en el cultivo.");
+        (torboQ(X), E= "Torbó", T="Fungicida y bactericida a base extractos vegetales (Por ejemplo: Bela Plus) + desinfectante, esterilizante e inhibidor de hongos (Por ejemplo, Bela Mix) en dosis de 25 cc / bomba de 4 galones. (Realizar las aplicaciones sobre mojado).");
+        (pataNegraN(X), E= "Pata negra", T="No se permite plantar demasiado temprano y profundo, porque el tubérculo madre afectado se pudre, las bacterias ingresan al tallo o penetran en los tubérculos jóvenes. Al reducir el daño durante la cosecha y la cosecha, el almacenamiento adecuado de las papas reduce el daño de las patas negras.");
+        (pataNegraQ(X), E= "Pata negra", T="Iprodione WP 50% SC (Suspensión Concentrada) 50% Papa cortada 350 - 400 g o cc/100 L de agua Papa entera 600 - 800 g o cc/100 L de agua. Papa cortada: tiempo de inmersión: 10 - 15 minutos. Papa entera. Antes de la plantación: tiempo de inmersión: 10 - 15 minutos.");
+        (costraNegraN(X), E= "Costra negra", T="Evitar encharcamiento en el cultivo ya que el agua es un mecanismo de las enfermedades. Impedir que el agua se acumule en el tronco de la planta. Realizar una buena fertilización, efectuando un análisis de suelo. Evitar aplicaciones excesivas de nitrógeno. Eliminar malezas (arvenses) en el cultivo.");
+        (costraNegraQ(X), E= "Costra negra", T="Propamocarb 72 SL (Concentrado Soluble) en dosis de 1.5 cc / litro de agua + Carbendazim 50 SC (Suspensión Concentrada) en dosis 1 cc / litro de agua.");
+        (marchitezBacterianaN(X), E= "Marchitez bacteriana", T="Eliminar plantas enfermas, Manejo de camellones a una altura de 0.4 a 0.5 m. Realizar siembras en surcos con curvas a nivel, Mantener un programa de fertilización de acuerdo a las necesidades del cultivo. (realizar análisis de suelo), Bajar la acidez del suelo aplicando cal o ceniza, esto dependerá del análisis de suelo.");
+        (marchitezBacterianaQ(X), E= "Marchitez bacteriana", T="Estreptomicina-oxitetraciclina 16.5 WP (Polvo Mojable) con una dosis de 20 g / bomba de 4 galones. 7 días, período de espera entre la última aplicación y la cosecha.");
+        (polillaN(X), E= "Polilla", T="Buena preparación del suelo eliminando terrones y grietas que le faciliten albergue de la plaga, Realizar un aporcado alto para crear una barrera física al insecto, Realizar cosecha de tubérculo en forma oportuna. Eliminar tubérculo con síntoma de daño, sacarlos del cultivo y enterrarlas profundo (0.8 - 1.0 m).");
+        (polillaQ(X), E= "Polilla", T="Spinotoram 6 SC (Suspensión Concentrada) en dosis de 300 a 350 ml / ha, aplicación dirigida al follaje en volumen de 25 cc / bomba de 4 galones. Intervalo de aplicación 7 días.");
+        (polillaGualtemaltecaN(X), E= "Polilla gualtemalteca", T="Recogida y destrucción de todos los tubérculos dañados y de los restos de cosecha. Además, se recomiendan otras medidas, sembrar los tubérculos a más de 15 cm de profundidad, y luego aporcar por ambos lados a una altura de 25-30 cm. Antes de sembrar recoger los tubérculos de campañas anteriores.");
+        (polillaGualtemaltecaQ(X), E= "Polilla gualtemalteca", T="En las parcelas afectadas: al suelo antes de la plantación con insecticidas en formulados granulados (oxamilo, teflutrin, clorpirifos), y a la planta durante el ciclo de cultivo con insecticidas de aplicación foliar (clorantraniliprol, clorpirifos, teflutrín y otros).");
+        (carbonN(X), E= "Carbon", T="Prácticas culturales tendientes a evitar la contaminación de suelos sanos, como limpieza de maquinarias e implementos agrícolas, control de ingreso y tránsito de animales. Rotación de cultivos y control de malezas hospederas.");
+        (carbonQ(X), E= "Carbon", T="Algunos desinfectantes de semilla como flutriafol (Vincit Flo), fencubonazole (Indar Flo) y benomilo (Benlate) demostraron una significativa reducción (70-90%) en la producción de agallas. Esto debería disminuir el impacto de la enfermedad al reducir la infestación de los suelos.");
+        (royaN(X), E= "Roya", T="Uso de cultivares de ciclo precoz y siembras en épocas recomendadas para cada región, evitar periodos prolongados de siembra, eliminación de plantas hospederas, implementación del llamado vacío sanitario, es decir de 60 a 90 días sin la siembra del cultivo. Monitoreo desde el inicio del desarrollo del cultivo.");
+        (royaQ(X), E= "Roya", T="Tebuconazole es un triazol, sistémico que se absorve y redistribuye vía xilemática (movimiento acropétalo). Tiene propiedades preventivas, curativas y erradicantes. La mezcla Trifloxystrobina (estrobirulina) + cyproconazole (triazol) posee acción sistémica y mesostémica (movimiento translaminar).").
 
 createFacts(
     _{
