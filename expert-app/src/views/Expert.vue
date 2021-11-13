@@ -1,11 +1,11 @@
 <template>
   <section class="section">
     <b-loading
-      is-full-page
+      :is-full-page="false"
       v-model="isLoading"
     ></b-loading>
     <b-notification
-      :duration="4000"
+      :duration="notification.duration"
       :type="notification.type"
       aria-close-label="Close notification"
       auto-close
@@ -97,8 +97,9 @@ export default defineComponent({
       active: false,
       type: "",
       text: "",
+      duration: 4000,
     },
-    minimumSelections: 2,
+    minimumSelections: 1,
     traitOptions: [] as TraitOption[],
     solution: {} as Solution,
   }),
@@ -131,7 +132,7 @@ export default defineComponent({
     async resolve() {
       if (!this.verifySelections()) {
         this.showNotification(
-          `Debes seleccionar al menos ${this.minimumSelections} opciones`,
+          `Debes seleccionar al menos ${this.minimumSelections} opcion(es)`,
           "is-danger"
         );
         return;
@@ -186,7 +187,13 @@ export default defineComponent({
         this.isLoading = false;
       })
       .catch(() => {
-        this.showNotification("Error al conectar con el API.", "is-danger");
+        this.showNotification(
+          "Error al conectar con el API. Será redirigido al inicio.",
+          "is-danger"
+        );
+        setTimeout(() => {
+          this.$router.push("/");
+        }, this.notification.duration);
       });
     this.requestTraitOptions().then((options) => {
       this.traitOptions = options;
