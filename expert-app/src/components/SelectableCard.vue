@@ -11,9 +11,14 @@
     ></b-icon>
     <b-image
       :alt="'Imagen ' + title"
+      :lazy="true"
       :src="imageUrl"
+      ratio="6by4"
+      rounded
     ></b-image>
-    <h4>{{ title }}</h4>
+    <h4 class="subtitle">
+      <strong>{{ title }}</strong>
+    </h4>
   </div>
 </template>
 
